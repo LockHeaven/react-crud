@@ -18,6 +18,7 @@ router.route('/add').post((req, res) => {
   const birthday = Date.parse(req.body.birthday);
   const typedocument = req.body.typedocument;
   const residence = req.body.residence;
+  const img = req.body.img;
 
   const newPersona = new Persona({
     names,
@@ -30,6 +31,7 @@ router.route('/add').post((req, res) => {
     birthday,
     typedocument,
     residence,
+    img,
   });
 
   newPersona.save()
@@ -62,6 +64,7 @@ router.route('/:id').delete((req, res) => {
         persona.birthday = Date.parse(req.body.birthday);
         persona.typedocument = req.body.typedocument;
         persona.residence = req.body.residence;
+        persona.img = req.body.img;
         
         persona.save()
           .then(() => res.json('Persona updated!'))

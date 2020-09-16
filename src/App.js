@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
@@ -8,11 +7,11 @@ import Navbar from './components/Layout'
 import UserList from './components/UserList';
 import CreateUser from './components/CreateUser';
 import EditUser from './components/EditUser';
+import UserCards from './components/UserCards';
 import {PageHeader} from 'antd';
 
 
 
-const url = "https://localhost:5000/persona/";
 
 
 class App extends Component {
@@ -26,6 +25,7 @@ class App extends Component {
       <Route path='/' exact component={UserList} />
       <Route path='/add' exact component={CreateUser} />
       <Route path='/edit/:id' exact component={EditUser} />
+      <Route path='/cards' exact component={UserCards} />
       </div>
       </Router>
     )

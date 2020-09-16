@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 //import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import { DatePicker, Button, Typography } from 'antd';
+import { DatePicker, Typography } from 'antd';
 import {FileAddOutlined} from '@ant-design/icons';
  
 const {Text}=Typography;
@@ -21,6 +19,7 @@ export default class CreateUser extends Component {
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeBirthday = this.onChangeBirthday.bind(this);
         this.onChangeTypeDocument = this.onChangeTypeDocument.bind(this);
+        this.onChangeImg = this.onChangeImg.bind(this);
         this.onChangeResidence = this.onChangeResidence.bind(this);
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -36,6 +35,7 @@ export default class CreateUser extends Component {
             birthday: new Date(),
             typedocument: '',
             residence: '',
+            img:'',
             documents: [],
             residences: []
         }
@@ -120,6 +120,12 @@ export default class CreateUser extends Component {
         });
     }
 
+    onChangeImg(e) {
+        this.setState({
+            img: e.target.value
+        });
+    }
+
     onChangeBirthday(date) {
         this.setState({
             birthday: date
@@ -139,7 +145,9 @@ export default class CreateUser extends Component {
             password: this.state.password,
             residence: this.state.residence,
             typedocument: this.state.typedocument,
+            img: this.state.img,
             birthday: this.state.birthday
+
 
         }
 
@@ -147,8 +155,6 @@ export default class CreateUser extends Component {
 
         axios.post('http://localhost:5000/persona/add', user)
             .then(res => console.log(res.data));
-
-
 
     }
 
@@ -158,8 +164,8 @@ export default class CreateUser extends Component {
             <div  >
                 <h3><Text type="warning">create new user</Text></h3>
                 <form onSubmit={this.onSubmit}>
-                  
-                    <div class="form-group ">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
 
                         <label>Nombres: </label>
                         <input type="text"
@@ -171,7 +177,7 @@ export default class CreateUser extends Component {
                       
                     </div>
                    
-                    <div className="form-group ">
+                    <div className="form-group col-md-6">
                  
                         <label>Apellidos </label>
                         <input type="text"
@@ -181,6 +187,7 @@ export default class CreateUser extends Component {
                             onChange={this.onChangeLastNames}
                         />
                         
+                    </div>
                     </div>
                 <div class="form-row">
                     <div className="form-group col-md-2">
@@ -252,7 +259,7 @@ export default class CreateUser extends Component {
                    </div> 
                    
                    <div class="form-row"> 
-                    <div className="form-group col-md-1 ">
+                    <div className="form-group col-md-2 ">
                     
                         <label>Birthday </label>
                         <div>
@@ -264,7 +271,7 @@ export default class CreateUser extends Component {
                         
                     </div>
                    
-                    <div className="form-group col-md-4 ">
+                    <div className="form-group col-md-5 ">
                    
                         <label>Residencia </label>
                         
@@ -288,6 +295,27 @@ export default class CreateUser extends Component {
                         </select>
                         
                     </div>
+
+                    <div className="form-group col-md-5 ">
+                   
+                   <label>Avatar </label>
+                   
+                   <select ref="userInput"
+                       required
+                       className="form-control"
+                       value={this.state.img}
+                       onChange={this.onChangeImg}>
+
+                       <option key="https://semantic-ui.com/images/avatar/large/elliot.jpg" value="https://semantic-ui.com/images/avatar/large/elliot.jpg">Elliot</option>
+                       <option key="https://semantic-ui.com/images/avatar/large/christian.jpg" value="https://semantic-ui.com/images/avatar/large/christian.jpg">Christian</option>
+                       <option key="https://semantic-ui.com/images/avatar/large/jenny.jpg" value="https://semantic-ui.com/images/avatar/large/jenny.jpg">Jenny</option>
+                       <option key="https://semantic-ui.com/images/avatar/large/stevie.jpg" value="https://semantic-ui.com/images/avatar/large/stevie.jpg">Stevie</option>
+                       <option key="https://semantic-ui.com/images/avatar/large/daniel.jpg" value="https://semantic-ui.com/images/avatar/large/daniel.jpg">Daniel</option>
+                           
+                   </select>
+                   
+               </div>
+
                    </div>
                     <div className="form-group">
                     <input type="submit" value="Create" className="btn btn-primary" /> <FileAddOutlined/>

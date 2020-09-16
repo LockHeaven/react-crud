@@ -13,6 +13,7 @@ const personaSchema = new Schema({
   birthday: { type: Date, required: true },
   typedocument : { type: String, required: true },
   residence : { type: String, required: true },
+  img : { type: String, required: true },
   
 }, {
   timestamps: true,

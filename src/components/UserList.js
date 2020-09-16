@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { CardDeck, Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
 import {Button,Typography} from 'antd';
 import {DeleteOutlined,ScissorOutlined } from '@ant-design/icons';
 const {Text} = Typography;
+
 const Usuarios = props => (
  
       

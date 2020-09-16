@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-//import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { DatePicker,Typography } from 'antd';
 import {CheckOutlined } from '@ant-design/icons';
@@ -23,6 +20,7 @@ export default class EditUser extends Component {
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeBirthday = this.onChangeBirthday.bind(this);
         this.onChangeTypeDocument = this.onChangeTypeDocument.bind(this);
+        this.onChangeImg = this.onChangeImg.bind(this);
         this.onChangeResidence = this.onChangeResidence.bind(this);
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -38,6 +36,7 @@ export default class EditUser extends Component {
             birthday: new Date(),
             typedocument: '',
             residence: '',
+            img:'',
             documents: [],
             residences: []
         }
@@ -58,6 +57,7 @@ export default class EditUser extends Component {
             password: response.data.password,
             typedocument: response.data.typedocument,
             residence: response.data.residence,
+            img: response.data.img,
             birthday: new Date(response.data.birthday)
           })   
         })
@@ -139,6 +139,11 @@ export default class EditUser extends Component {
             residence: e.target.value
         });
     }
+    onChangeImg(e) {
+        this.setState({
+            img: e.target.value
+        });
+    }
 
     onChangeBirthday(date) {
         this.setState({
@@ -159,6 +164,7 @@ export default class EditUser extends Component {
             password: this.state.password,
             residence: this.state.residence,
             typedocument: this.state.typedocument,
+            img: this.state.img,
             birthday: this.state.birthday
 
         }
@@ -166,8 +172,8 @@ export default class EditUser extends Component {
         axios.post('http://localhost:5000/persona/update/'+ this.props.match.params.id, user)
         .then(res => console.log(res.data));
 
-
         window.location = '/';
+     
 
         
 
@@ -226,23 +232,24 @@ export default class EditUser extends Component {
                             onChange={this.onChangeDocument}
                         />
                     </div>
+                    
                     <div className="form-group col-md-5">
-                        <label>Email </label>
-                        <input type="text"
-                            required
-                            className="form-control"
-                            value={this.state.email}
-                            onChange={this.onChangeEmail}
-                        />
-                    </div>
-                    </div>
-                    <div className="form-group">
                         <label>Telefono </label>
                         <input type="text"
                             required
                             className="form-control"
                             value={this.state.phone}
                             onChange={this.onChangePhone}
+                        />
+                    </div>
+                    </div>
+                    <div className="form-group ">
+                        <label>Email </label>
+                        <input type="text"
+                            required
+                            className="form-control"
+                            value={this.state.email}
+                            onChange={this.onChangeEmail}
                         />
                     </div>
                     <div class="form-row">
@@ -267,7 +274,7 @@ export default class EditUser extends Component {
                     </div>
 
                     <div class="form-row"> 
-                    <div className="form-group col-md-1">
+                    <div className="form-group col-md-2">
                         <label>Birthday </label>
                         <div>
                             <DatePicker
@@ -277,7 +284,7 @@ export default class EditUser extends Component {
                         </div>
                     </div>
 
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-5">
                         <label>Residencia </label>
                         <select ref="userInput"
                             required
@@ -294,6 +301,26 @@ export default class EditUser extends Component {
                             }
                         </select>
                     </div>
+                    
+                    <div className="form-group col-md-5 ">
+                   
+                   <label>Avatar </label>
+                   
+                   <select ref="userInput"
+                       required
+                       className="form-control"
+                       value={this.state.img}
+                       onChange={this.onChangeImg}>
+
+                       <option key="https://semantic-ui.com/images/avatar/large/elliot.jpg" value="https://semantic-ui.com/images/avatar/large/elliot.jpg">Elliot</option>
+                       <option key="https://semantic-ui.com/images/avatar/large/christian.jpg" value="https://semantic-ui.com/images/avatar/large/christian.jpg">Christian</option>
+                       <option key="https://semantic-ui.com/images/avatar/large/jenny.jpg" value="https://semantic-ui.com/images/avatar/large/jenny.jpg">Jenny</option>
+                       <option key="https://semantic-ui.com/images/avatar/large/stevie.jpg" value="https://semantic-ui.com/images/avatar/large/stevie.jpg">Stevie</option>
+                       <option key="https://semantic-ui.com/images/avatar/large/daniel.jpg" value="https://semantic-ui.com/images/avatar/large/daniel.jpg">Daniel</option>
+                           
+                   </select>
+                   
+               </div>
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Edit" className="btn btn-primary" /> <CheckOutlined/>
