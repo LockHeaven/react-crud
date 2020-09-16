@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { CardDeck, Card, Button, CardImg, CardTitle, CardText, CardSubtitle, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
-
+import { CardDeck, Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
+import {Button,Typography} from 'antd';
+import {DeleteOutlined,ScissorOutlined } from '@ant-design/icons';
+const {Text} = Typography;
 const Usuarios = props => (
-
+ 
+      
     <tr>
         <td>{props.persona.names}</td>
         <td>{props.persona.lastnames}</td>
@@ -16,7 +19,7 @@ const Usuarios = props => (
         <td>{props.persona.birthday.substring(0, 10)}</td>
         <td>{props.persona.residence}</td>
         <td>
-        <Link to={"edit/"+props.persona._id}>edit</Link> | <a href="#" onClick={() => { props.deleteUser(props.persona._id) }}>delete</a>
+      <Button type ="dashed"> <Link to={"edit/"+props.persona._id}>edit <ScissorOutlined /></Link> </Button> <Button danger > <a href="#" onClick={() => { props.deleteUser(props.persona._id) }}><Text type="danger">delete <DeleteOutlined/></Text></a> </Button>
         </td>
     </tr>
 
@@ -66,9 +69,11 @@ export default class UserList extends Component {
         return (
             <div className='App'>
                 <br />
-                <table className="table">
-                    <thead>
-                        <tr>
+                <table  class="table table-striped table-bordered" >
+                
+               
+                    <thead >
+                        <tr >
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>TD</th>

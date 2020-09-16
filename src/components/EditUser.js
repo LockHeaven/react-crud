@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
+//import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { DatePicker,Typography } from 'antd';
+import {CheckOutlined } from '@ant-design/icons';
+
+ 
+const {Text}=Typography;
 
 export default class EditUser extends Component {
     constructor(props) {
@@ -173,7 +178,7 @@ export default class EditUser extends Component {
     render() {
         return (
             <div>
-                <h3>Create new User</h3>
+                <h3><Text type="success">edit old user</Text></h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Nombres: </label>
@@ -193,7 +198,9 @@ export default class EditUser extends Component {
                             onChange={this.onChangeLastNames}
                         />
                     </div>
-                    <div className="form-group">
+
+                      <div class="form-row">
+                      <div className="form-group col-md-2"> 
                         <label>TD </label>
                         <select ref="userInput"
                             required
@@ -210,7 +217,7 @@ export default class EditUser extends Component {
                             }
                         </select>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group col-md-5">
                         <label>Documento </label>
                         <input type="text"
                             required
@@ -219,7 +226,7 @@ export default class EditUser extends Component {
                             onChange={this.onChangeDocument}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group col-md-5">
                         <label>Email </label>
                         <input type="text"
                             required
@@ -227,6 +234,7 @@ export default class EditUser extends Component {
                             value={this.state.email}
                             onChange={this.onChangeEmail}
                         />
+                    </div>
                     </div>
                     <div className="form-group">
                         <label>Telefono </label>
@@ -237,7 +245,8 @@ export default class EditUser extends Component {
                             onChange={this.onChangePhone}
                         />
                     </div>
-                    <div className="form-group">
+                    <div class="form-row">
+                    <div className="form-group col-md-6">
                         <label>Usuario </label>
                         <input type="text"
                             required
@@ -246,16 +255,19 @@ export default class EditUser extends Component {
                             onChange={this.onChangeUsername}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group col-md-6">
                         <label>Password </label>
-                        <input type="text"
+                        <input type="password"
                             required
                             className="form-control"
                             value={this.state.password}
                             onChange={this.onChangePassword}
                         />
                     </div>
-                    <div className="form-group">
+                    </div>
+
+                    <div class="form-row"> 
+                    <div className="form-group col-md-1">
                         <label>Birthday </label>
                         <div>
                             <DatePicker
@@ -264,7 +276,8 @@ export default class EditUser extends Component {
                             />
                         </div>
                     </div>
-                    <div className="form-group">
+
+                    <div className="form-group col-md-4">
                         <label>Residencia </label>
                         <select ref="userInput"
                             required
@@ -281,8 +294,9 @@ export default class EditUser extends Component {
                             }
                         </select>
                     </div>
+                    </div>
                     <div className="form-group">
-                        <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+                        <input type="submit" value="Edit" className="btn btn-primary" /> <CheckOutlined/>
                     </div>
                 </form>
             </div>

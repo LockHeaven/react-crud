@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
+//import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-
+import { DatePicker, Button, Typography } from 'antd';
+import {FileAddOutlined} from '@ant-design/icons';
+ 
+const {Text}=Typography;
 export default class CreateUser extends Component {
     constructor(props) {
         super(props);
@@ -41,7 +44,8 @@ export default class CreateUser extends Component {
     
 
     componentDidMount() {
-        axios.get('http://localhost:5000/ciudad/')
+        
+            axios.get('http://localhost:5000/ciudad/')
             .then(response => {
                 if (response.data.length > 0) {
                     this.setState({
@@ -50,7 +54,7 @@ export default class CreateUser extends Component {
                     })
                 }
             })
-
+        
             axios.get('http://localhost:5000/documento/')
             .then(response => {
                 if (response.data.length > 0) {
@@ -151,10 +155,12 @@ export default class CreateUser extends Component {
 
     render() {
         return (
-            <div>
-                <h3>Create new User</h3>
+            <div  >
+                <h3><Text type="warning">create new user</Text></h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
+                  
+                    <div class="form-group ">
+
                         <label>Nombres: </label>
                         <input type="text"
                             required
@@ -162,8 +168,11 @@ export default class CreateUser extends Component {
                             value={this.state.names}
                             onChange={this.onChangeNames}
                         />
+                      
                     </div>
-                    <div className="form-group">
+                   
+                    <div className="form-group ">
+                 
                         <label>Apellidos </label>
                         <input type="text"
                             required
@@ -171,8 +180,10 @@ export default class CreateUser extends Component {
                             value={this.state.lastnames}
                             onChange={this.onChangeLastNames}
                         />
+                        
                     </div>
-                    <div className="form-group">
+                <div class="form-row">
+                    <div className="form-group col-md-2">
                         <label>TD </label>
                         <select ref="userInput"
                             required
@@ -189,7 +200,7 @@ export default class CreateUser extends Component {
                             }
                         </select>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group col-md-5">
                         <label>Documento </label>
                         <input type="text"
                             required
@@ -198,7 +209,7 @@ export default class CreateUser extends Component {
                             onChange={this.onChangeDocument}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group col-md-5">
                         <label>Email </label>
                         <input type="text"
                             required
@@ -207,7 +218,8 @@ export default class CreateUser extends Component {
                             onChange={this.onChangeEmail}
                         />
                     </div>
-                    <div className="form-group">
+                 </div>
+                    <div className="form-group ">
                         <label>Telefono </label>
                         <input type="text"
                             required
@@ -216,7 +228,8 @@ export default class CreateUser extends Component {
                             onChange={this.onChangePhone}
                         />
                     </div>
-                    <div className="form-group">
+                    <div class="form-row">
+                    <div className="form-group col-md-6">
                         <label>Usuario </label>
                         <input type="text"
                             required
@@ -225,16 +238,22 @@ export default class CreateUser extends Component {
                             onChange={this.onChangeUsername}
                         />
                     </div>
-                    <div className="form-group">
+
+                    <div className="form-group  col-md-6">                       
                         <label>Password </label>
-                        <input type="text"
+                        <input type="password"
                             required
                             className="form-control"
                             value={this.state.password}
                             onChange={this.onChangePassword}
                         />
+                        
                     </div>
-                    <div className="form-group">
+                   </div> 
+                   
+                   <div class="form-row"> 
+                    <div className="form-group col-md-1 ">
+                    
                         <label>Birthday </label>
                         <div>
                             <DatePicker
@@ -242,26 +261,36 @@ export default class CreateUser extends Component {
                                 onChange={this.onChangeBirthday}
                             />
                         </div>
+                        
                     </div>
-                    <div className="form-group">
+                   
+                    <div className="form-group col-md-4 ">
+                   
                         <label>Residencia </label>
+                        
                         <select ref="userInput"
                             required
                             className="form-control"
                             value={this.state.residence}
                             onChange={this.onChangeResidence}>
+                                
                             {
+                                
                                 this.state.residences.map(function (user) {
                                     return <option
                                         key={user}
                                         value={user}>{user}
                                     </option>;
+                                
                                 })
+                             
                             }
                         </select>
+                        
                     </div>
+                   </div>
                     <div className="form-group">
-                        <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+                    <input type="submit" value="Create" className="btn btn-primary" /> <FileAddOutlined/>
                     </div>
                 </form>
             </div>
